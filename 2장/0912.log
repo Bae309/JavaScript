@@ -1,0 +1,87 @@
+console.log("안녕하세요.")
+VM55:1 안녕하세요.
+undefined
+alert("안녕하세요.")
+undefined
+a=10
+10
+alert(a)
+undefined
+confirm("종료하시겠습니까?)
+VM224:1 Uncaught SyntaxError: Invalid or unexpected token
+confirm("종료하시겠습니까?")
+true
+prompt("당신의 이름은?")
+'배성윤'
+prompt("종료하시겠습니까?")
+null
+prompt("종료하시겠습니까?(예/아니오)")
+'예'
+name = "배성윤"
+'배성윤'
+console.log(name + "님 환영합니다.")
+VM786:1 배성윤님 환영합니다.
+undefined
+doucument.write("제 이름은 " + name + "입니다.")4
+VM976:1 Uncaught SyntaxError: Unexpected number
+doucument.write("제 이름은 " + name + "입니다.")
+VM1062:1 Uncaught ReferenceError: doucument is not defined
+    at <anonymous>:1:1
+(익명) @ VM1062:1
+document.write
+ƒ write() { [native code] }
+sfd
+VM1117:1 Uncaught ReferenceError: sfd is not defined
+    at <anonymous>:1:1
+(익명) @ VM1117:1
+document
+#document
+document.write("제 이름은 " + name + "입니다.")
+undefined
+10 + 20
+30
+let result
+undefined
+result = 10
+10
+result = 20
+20
+const number = 10
+undefined
+number
+10
+number = 20
+VM1550:1 Uncaught TypeError: Assignment to constant variable.
+    at <anonymous>:1:8
+(익명) @ VM1550:1
+let age = 23
+undefined
+console.log(name + "님 나이는 " + age + "세입니다.")
+VM1792:1 배성윤님 나이는 23세입니다.
+undefined
+console.log(`${name}님의 나이는 ${age}세 입니다.`)
+VM1901:1 배성윤님의 나이는 23세 입니다.
+undefined
+let student = {
+    major : "컴퓨터공학부",
+    idNum : 202095041,
+    name : "배성윤"
+}
+undefined
+student
+{major: '컴퓨터공학부', idNum: 202095041, name: '배성윤'}
+student.name
+'배성윤'
+student["major"]
+'컴퓨터공학부'
+let id = Symbol()
+undefined
+const member = {
+    name : "배성윤",
+    [id] : 12345
+}
+undefined
+member
+{name: '배성윤', Symbol(): 12345}
+member[id]
+12345
