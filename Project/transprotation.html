@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지도 생성하기</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <!-- 지도를 표시할 div 입니다 -->
+    <div id="map" style="width:100%;height:550px;"></div>
+
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=66bb56bd796e4183ae7906d8b515a0fe"></script>
+    <script>
+
+        // 농림축산식품부 위치 마커
+        const mafraLat = 36.12448;
+        const mafraLng = 128.1836;
+
+        // 교통정보를 포함한 데이터
+        const trafficData = {
+            "count": 1,
+            "list": [
+                {
+                    "sdate": "20231216",
+                    "stime": "1900",
+                    "cjunkook": "5060000",
+                    // ... (이하 생략)
+                    "cyysu_bus": "0:00"
+                }
+            ],
+            "message": "인증키가 유효합니다.",
+            "code": "SUCCESS"
+        };
+
+        // 기존 지도 생성 코드...
+        var mapContainer = document.getElementById('map'),
+            mapOption = {
+                center: new kakao.maps.LatLng(mafraLat, mafraLng),
+                level: 3
+            };
+
+        var map = new kakao.maps.Map(mapContainer, mapOption);
+
+        // 농림축산식품부 마커 생성
+        var mafraMarkerPosition = new kakao.maps.LatLng(mafraLat, mafraLng);
+        var mafraMarker = new kakao.maps.Marker({
+            position: mafraMarkerPosition,
+            map: map,
+            title: '국가교통정보센터'
+        });
+
+        // 마커 클릭 이벤트에 인포윈도우 추가
+        var mafraIwContent = '<div style="padding:5px;font-size:0.9rem;"><a href="https://www.mafra.go.kr" style="color:blue;text-decoration:none;" target="_blank">농림축산식품부</a></div>';
+        var mafraInfowindow = new kakao.maps.InfoWindow({
+            content: mafraIwContent,
+            removable: true
+        });
+
+        kakao.maps.event.addListener(mafraMarker, 'click', function () {
+            mafraInfowindow.open(map, mafraMarker);
+        });
+
+        // 추가: 지역별 교통정보 마커 생성
+        var trafficMarkerPosition = new kakao.maps.LatLng(mafraLat + 0.1, mafraLng + 0.1);
+        var trafficMarker = new kakao.maps.Marker({
+            position: trafficMarkerPosition,
+            map: map,
+            title: '지역별 교통정보'
+        });
+
+        // 추가: 마커 클릭 이벤트에 인포윈도우 추가
+        var trafficIwContent = '<div style="padding:5px;font-size:0.9rem;">' +
+            '<strong>지역별 교통정보</strong>' +
+            '<p>출발 시간: ' + trafficData.list[0].stime + '</p>' +
+            '<p>출발 지역: ' + trafficData.list[0].cjunkook + '</p>' +
+            // ... (이하 생략)
+            '</div>';
+        var trafficInfowindow = new kakao.maps.InfoWindow({
+            content: trafficIwContent,
+            removable: true
+        });
+
+        kakao.maps.event.addListener(trafficMarker, 'click', function () {
+            trafficInfowindow.open(map, trafficMarker);
+        });
+
+    </script>
+</body>
+</html>
